@@ -1,0 +1,1 @@
+Django online store project
