@@ -1,0 +1,40 @@
+{% for mem in menu0 %}
+{% if mem.get_children %}
+<li class="nav-iten dropdown">
+    <a class="nav-link dropdown-toggle" href="#">{{ mem }}</a>
+    <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                {% for m1 in mem.get_children %}
+                {% if m1.get_children %}
+                    <li class="nav-iten dropdown">
+                        <a class="nav-link dropdown-toggle" href="#">{{ m1 }}</a></ul>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                            {% for m2 in m1.get_children %}
+                            {% if m2.get_children %}
+                            <ul><li class="nav-iten dropdown">
+                                <a class="nav-link dropdown-toggle" href="#">{{ m2 }}</a></ul></ul>
+                                <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                                    {% for m3 in m2.get_children %}
+                                    {% if m3.get_children %}
+                            <ul><ul><li class="nav-iten dropdown">
+                                <a class="nav-link dropdown-toggle" href="#">{{ m3 }}</a></ul></ul></ul>
+                                <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                                    {% else %}
+                                    <ul><ul><li><a class="dropdown-item" href="#">{{ m3 }}</a></li></ul></ul>
+                                    {% endif %}
+                                    {% endfor %}
+
+                                    {% else %}
+                                    <ul><li><a class="dropdown-item" href="#">{{ m2 }}</a></li></ul>
+                                    {% endif %}
+                                    {% endfor %}
+                {% else %}
+                        <li><a class="dropdown-item" href="#">{{ m1 }}</a></li>
+                        {% endif %}
+        {% endfor %}
+        {% else %}
+                <li><a class="dropdown-item" href="#">{{ m_m }}</a></li>
+                {% endif %}
+        {% endfor %}
+    </ul>
+</li>
+
