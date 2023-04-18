@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Product</title>
+</head>
+<body>
+<h1>Make product</h1>
+<form action="{% url 'lista:make_pr' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="name_product">Products name</label>
+    <input type="text" name="name_product"><br>
+    <label for="description_product">Description of the product</label><br>
+    <input type="text" name="description_product"><br>
+    <label for="categories">Category of the product</label><br>
+    <input list="cat" name="categories"><br>
+    <datalist id="cat">
+        {% for cat in category %}
+        <option value={{cat.name}} />
+        {% endfor %}
+    </datalist>
+    <input type="submit">
+</form>
+
+</body>
+</html>

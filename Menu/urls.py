@@ -2,7 +2,11 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import *
 
+app_name = 'lista'
 urlpatterns = [
-    path('all/', category),
-    path('product/', product)
+    path('', category),
+    path('product/', product, name='product'),
+    path('make_pr/', CategoryList.as_view(), name='make_pr'),
+    path('pro/', ProductList.as_view(), name='pro'),
+    path('make/', ProductView.as_view(), name='make'),
 ]

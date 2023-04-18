@@ -19,7 +19,7 @@ from Menu.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('categories/', include('Menu.urls')),
-    path('', index),
+    path('', include('Menu.urls')),
+    path('index/', index),
 ]
 

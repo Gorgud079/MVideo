@@ -8,6 +8,12 @@
 <body>
 BASE
 {% show_menu %}
-
+{% for p in pro %}
+Название товара:{{ p.name }}
+<br>
+Описание:{{ p.description }}
+<hr>
+{% endfor %}
+d
 </body>
 </html>
