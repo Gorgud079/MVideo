@@ -14,12 +14,13 @@
     <label for="description_product">Description of the product</label><br>
     <input type="text" name="description_product"><br>
     <label for="categories">Category of the product</label><br>
-    <input list="cat" name="categories"><br>
+    <input list="cat" name="categories">
     <datalist id="cat">
         {% for cat in category %}
-        <option value={{cat.name}} />
+        <option value={{cat.id}}>{{cat.name}}</option>
         {% endfor %}
     </datalist>
+    <br>
     <input type="submit">
 </form>
 

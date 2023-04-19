@@ -6,7 +6,7 @@ app_name = 'lista'
 urlpatterns = [
     path('', category),
     path('product/', product, name='product'),
-    path('make_pr/', CategoryList.as_view(), name='make_pr'),
+    path('make_pr/', ProductView.as_view(), name='make_pr'),
     path('pro/', ProductList.as_view(), name='pro'),
     path('make/', ProductView.as_view(), name='make'),
 ]
