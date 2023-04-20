@@ -4,6 +4,10 @@ from django.views.generic.edit import FormMixin
 from .models import *
 from django.views.generic.list import ListView
 from django.views import View
+from django.core.mail import send_mail
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 def index(request):
     menu = MenuItem.objects.all()
@@ -33,8 +37,6 @@ class ProductView(View):
     def get(self, request, *args, **kwargs):
         category = Category.objects.all()
         return render(request, 'make_pr.html', {'category': category})
-
-
     def post(self, request, *args, **kwargs):
         product = Product(
             name=request.POST['name_product'],
@@ -42,5 +44,11 @@ class ProductView(View):
         )
         product.save()
         product.categories.add(request.POST['categories'])
+        send_mail(
+            subject=f'Новый {product.name}',
+            message=product.description,
+            from_email=os.getenv("email_e"),
+            recipient_list=['des079@inbox.ru']
+        )
         return redirect('lista:product')
 
