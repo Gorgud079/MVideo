@@ -4,7 +4,8 @@ from django.views.generic.edit import FormMixin
 from .models import *
 from django.views.generic.list import ListView
 from django.views import View
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -44,11 +45,17 @@ class ProductView(View):
         )
         product.save()
         product.categories.add(request.POST['categories'])
-        send_mail(
-            subject=f'Новый {product.name}',
-            message=product.description,
+        html_content = render_to_string('product_created.html',
+                                        {
+                                            'product': product,
+                                        })
+        msg = EmailMultiAlternatives(
+            subject=f'Добавлен новый товар!! Смотри!',
+            body=product.description,
             from_email=os.getenv("email_e"),
-            recipient_list=['des079@inbox.ru']
+            to=['des079@inbox.ru']
         )
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
         return redirect('lista:product')
 
